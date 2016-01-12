@@ -1,19 +1,22 @@
 Template.postEdit.events({ 
+
 	'submit form': function(e) {
 	    e.preventDefault();
-		var currentPostId = this._id;
 		var postProperties = {
-		url: $(e.target).find('[name=url]').val(), 
-		title: $(e.target).find('[name=title]').val()
+			_id: this._id,
+			url: $(e.target).find('[name=url]').val(), 
+			title: $(e.target).find('[name=title]').val()
 		}
 
-		Posts.update(currentPostId, {$set: postProperties}, function(error) { 
-			if (error) {
+		Meteor.call('postUpdate',postProperties, function(error,result) { 
+			if (error)
 		        // display the error to the user
-				alert(error.reason); 
-			} else {
-		        Router.go('postPage', {_id: currentPostId});
-		    }
+				return alert(error.reason); 
+			if(result.postExists)
+				alert('This link has already been submitted');
+			
+		   	Router.go('postPage', {_id:result._id});
+		    
 		}); 
 	},
 	
@@ -21,7 +24,7 @@ Template.postEdit.events({
 		e.preventDefault();
 		if (confirm("Delete this post?")) { 
 			var currentPostId = this._id; 
-			Posts.remove(currentPostId); 
+			Meteor.call('postDelete',currentPostId); 
 			Router.go('postsList');
 		}
 	}
