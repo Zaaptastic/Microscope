@@ -16,7 +16,8 @@ if (Posts.find().count() === 0) {
     userId: sacha._id,
     author: sacha.profile.name,
     url: 'http://sachagreif.com/introducing-telescope/',
-    submitted: new Date(now-7*3600*1000)
+    submitted: new Date(now-7*3600*1000),
+    commentsCount: 2
   });
 
   Comments.insert({
@@ -37,11 +38,13 @@ if (Posts.find().count() === 0) {
  	Posts.insert({
     	title: 'Meteor',
    		url: 'http://meteor.com',
-      author: 'None'
+      author: 'None',
+      commentsCount: 0
 	});
   	Posts.insert({
     	title: 'The Meteor Book',
     	url: 'http://themeteorbook.com',
-      author: 'None'
+      author: 'None',
+      commentsCount: 0
 	});
 }
