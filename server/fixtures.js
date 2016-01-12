@@ -34,16 +34,14 @@ if (Posts.find().count() === 0) {
     submitted: new Date(now - 3 * 3600 * 1000), body: 'You sure can Tom!'
   });
 
-	Posts.insert({
-    	title: 'Introducing Telescope',
-    	url: 'http://sachagreif.com/introducing-telescope/'
-  	});
  	Posts.insert({
     	title: 'Meteor',
-   		url: 'http://meteor.com'
+   		url: 'http://meteor.com',
+      author: 'None'
 	});
   	Posts.insert({
     	title: 'The Meteor Book',
-    	url: 'http://themeteorbook.com'
+    	url: 'http://themeteorbook.com',
+      author: 'None'
 	});
 }
