@@ -19,11 +19,12 @@ Template.postEdit.events({
 			_id: this._id,
 			url: $(e.target).find('[name=url]').val(), 
 			title: $(e.target).find('[name=title]').val()
-		}
+		};
 
-		var errors = validatePost(post);
+		var errors = validatePost(postProperties);
+		console.log(errors);
 		if (errors.title || errors.url)
-			return Session.set('postSubmitErrors',errors);
+			return Session.set('postEditErrors',errors);
 
 		Meteor.call('postUpdate',postProperties, function(error,result) { 
 			if (error)
