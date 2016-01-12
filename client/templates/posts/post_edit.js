@@ -11,9 +11,9 @@ Template.postEdit.events({
 		Meteor.call('postUpdate',postProperties, function(error,result) { 
 			if (error)
 		        // display the error to the user
-				return alert(error.reason); 
+				return throwError(error.reason); 
 			if(result.postExists)
-				alert('This link has already been submitted');
+				throwError('This link has already been submitted');
 			
 		   	Router.go('postPage', {_id:result._id});
 		    
